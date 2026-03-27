@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+build/
+dist/
+*.egg-info/
+
+# Veritabanı (Veritabanı şeması modellerde olduğu için dosyayı göndermiyoruz)
+*.db
+*.sqlite3
+
+# Kullanıcı Dosyaları (Gizlilik ve Repo Boyutu İçin)
+uploads/*
+markdown_notes/*
+
+# Klasör yapısının GitHub'da görünmesini ama içeriğinin boş olmasını istiyorsan 
+# bu dosyalara dokunma (Aşağıdaki .gitkeep açıklamasına bak)
+!uploads/.gitkeep
+!markdown_notes/.gitkeep
+
+# Çevresel Değişkenler (Eğer ileride .env kullanırsan)
+.env
+
+# Sistem Dosyaları
+.DS_Store
+Thumbs.db
+
+# IDE / Editör
+.vscode/
+.idea/
+*.swp
+*.swo
+*~

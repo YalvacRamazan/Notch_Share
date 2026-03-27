@@ -1,0 +1,121 @@
+:root {
+  --bg-color: #0f111a;
+  --card-bg: #1a1c2a;
+  --text-color: #e6e6e6;
+  --accent-color: #00d1ff;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  padding: 20px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 40px;
+  border-bottom: 2px solid var(--accent-color);
+  padding-bottom: 10px;
+}
+
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.course-card {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: 12px;
+  border-left: 5px solid var(--accent-color);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.course-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+.back-btn {
+  background: transparent;
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color);
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.pdf-list {
+  list-style: none;
+  padding: 0;
+}
+
+.pdf-list li {
+  background: var(--card-bg);
+  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.download-btn {
+  background: var(--accent-color);
+  color: var(--bg-color);
+  text-decoration: none;
+  padding: 5px 12px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+.note-item {
+  background: var(--card-bg);
+  margin-bottom: 15px;
+  padding: 15px;
+  border-radius: 12px;
+  list-style: none;
+}
+
+.note-text {
+  border-left: 5px solid #ffcc00;
+}
+
+.note-image img {
+  margin-top: 10px;
+  border: 1px solid var(--accent-color);
+}
+
+.note-body {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 5px;
+  white-space: pre-wrap;
+}
+.note-body h1,
+.note-body h2 {
+  color: var(--accent-color);
+  border-bottom: 1px solid rgba(0, 209, 255, 0.2);
+}
+
+.note-body ul {
+  padding-left: 20px;
+}
+
+.note-body code {
+  background: #282a36;
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-family: "Fira Code", monospace;
+}

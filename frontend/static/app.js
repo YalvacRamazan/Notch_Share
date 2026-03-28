@@ -7,12 +7,12 @@ async function loadCourses() {
 
   courses.forEach((course) => {
     const card = document.createElement("div");
-    card.className = "group relative bg-cardbg rounded-2xl p-6 border border-gray-800 overflow-hidden hover:border-primary/50 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(0,209,255,0.15)] hover:-translate-y-1 cursor-pointer flex flex-col h-full";
+    card.className = "group relative bg-cardbg rounded-2xl p-6 border border-gray-800 overflow-hidden hover:border-primary/50 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(225,29,72,0.15)] hover:-translate-y-1 cursor-pointer flex flex-col h-full";
     card.innerHTML = `
       <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
       
       <div class="flex-grow">
-        <div class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center mb-6 text-2xl text-primary group-hover:scale-110 transition-transform duration-300">
+        <div class="w-12 h-12 bg-gray-800/80 rounded-lg flex items-center justify-center mb-6 text-2xl text-primary group-hover:scale-110 transition-transform duration-300">
           <i class="fas fa-book-open"></i>
         </div>
         <h3 class="text-xl font-bold text-white mb-2 leading-tight">${course.name}</h3>
@@ -25,7 +25,7 @@ async function loadCourses() {
       </div>
     `;
     
-    // Make entire card clickable for better UX
+    // Add click event listener to the whole card
     card.addEventListener('click', () => {
       location.href = `/static/course.html?id=${course.id}`;
     });

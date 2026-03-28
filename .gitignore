@@ -35,3 +35,7 @@ Thumbs.db
 *.swp
 *.swo
 *~
+
+# Agent/AI Files
+AGENT.md
+PROCESS.md

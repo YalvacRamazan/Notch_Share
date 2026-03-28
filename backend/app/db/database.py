@@ -8,7 +8,9 @@ from sqlalchemy.orm import sessionmaker
 # Database ile konusacak olan 'session class'
 # Modellerimizin temel sinifi
 
-SQLALCHEMY_DATABASE_URL = "sqlite:///./ybs_notlar.db"
+import os
+db_path = os.getenv("DATABASE_PATH", "./ybs_notlar.db")
+SQLALCHEMY_DATABASE_URL = f"sqlite:///{db_path}"
 
 engine = create_engine(
   SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}

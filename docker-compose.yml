@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - DATABASE_PATH=/app/data/ybs_notlar.db
+    volumes:
+      # Veritabanını kalıcı kılacak volume dizini
+      - sqlite_data:/app/data
+      # Yüklemeler ve Notlar (Kalıcı ve R/W)
+      - uploads_data:/app/uploads
+      - markdown_data:/app/markdown_notes
+      # Uygulama kodlarını Salt-Okunur (Read-Only) çalıştırıyoruz (Security)
+      - ./backend:/app/backend:ro
+      - ./frontend:/app/frontend:ro
+      - ./add_note.py:/app/add_note.py:ro
+      - ./init_db.py:/app/init_db.py:ro
+    restart: always
+
+volumes:
+  sqlite_data:
+  uploads_data:
+  markdown_data:

@@ -67,7 +67,7 @@ async function loadCourseDetail() {
         ${headerHtml}
         <div class="px-6 py-6 flex justify-between items-center bg-black/5">
           <span class="text-gray-400 text-sm"><i class="fas fa-info-circle mr-2"></i>PDF Belgesi</span>
-          <a href="/uploads/${course.slug}/${note.file_path}" target="_blank" class="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-primary/10 text-primary border border-primary/20 hover:bg-primary hover:text-background font-semibold rounded-lg transition-all duration-300 shadow-[0_0_15px_rgba(0,209,255,0.1)] hover:shadow-[0_0_20px_rgba(0,209,255,0.4)]">
+          <a href="/uploads/${course.slug}/${note.file_path}" target="_blank" class="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-primary/10 text-primary border border-primary/20 hover:bg-primary hover:text-background font-semibold rounded-lg transition-all duration-300 shadow-[0_0_15px_rgba(225,29,72,0.1)] hover:shadow-[0_0_20px_rgba(225,29,72,0.4)]">
             <i class="fas fa-external-link-alt"></i> Aç / İndir
           </a>
         </div>
@@ -83,7 +83,7 @@ async function loadCourseDetail() {
         contentHtml = `
         ${headerHtml}
         <div class="p-6 text-gray-300 leading-relaxed bg-black/10">
-          <div class="prose prose-invert prose-cyan max-w-none">
+          <div class="prose prose-invert prose-rose max-w-none">
             ${note.content}
           </div>
         </div>

@@ -3,9 +3,24 @@ import os
 from backend.app.db.database import SessionLocal
 from backend.app.db import models
 
+import getpass
+import bcrypt
+
 def start_interactive_add():
   db = SessionLocal()
   try:
+    print("="*30)
+    print(" YBS NOTCH Yonetici Girisi ")
+    print("="*30)
+    username = input("Kullanici Adi: ")
+    password = getpass.getpass("Parola: ")
+    
+    admin = db.query(models.Admin).filter(models.Admin.username == username).first()
+    if not admin or not bcrypt.checkpw(password.encode('utf-8'), admin.password_hash.encode('utf-8')):
+      print(" HATA: Yetkisiz giris. Kullanici adi veya parola yanlis!")
+      return
+    print(" Basariyla giris yapildi.\n")
+
     print("\n" + "="*30)
     print(" MEVCUT DERSLERIN LISTESI")
     print("="*30)

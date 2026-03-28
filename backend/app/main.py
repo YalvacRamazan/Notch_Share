@@ -37,6 +37,10 @@ def get_course_details(slug: str, db: Session = Depends(database.get_db)):
   return course
 @app.get("/api/courses/{course_id}/notes")
 def get_notes(course_id: int, db: Session = Depends(database.get_db)):
+  course = db.query(models.Course).filter(models.Course.id == course_id).first()
+  if not course:
+    raise HTTPException(status_code=404, detail="Ders Bulunamadı")
+    
   notes = db.query(models.Note).filter(models.Note.course_id == course_id).all()
   processed_notes = []
   for note in notes:
@@ -49,7 +53,7 @@ def get_notes(course_id: int, db: Session = Depends(database.get_db)):
     }
 
     if note.note_type == "markdown" and note.file_path:
-      md_path = os.path.join("markdown_notes", note.file_path)
+      md_path = os.path.join("markdown_notes", course.slug, note.file_path)
       if os.path.exists(md_path):
         with open(md_path, "r", encoding="utf-8") as f:
           md_text = f.read()

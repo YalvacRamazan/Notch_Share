@@ -35,10 +35,12 @@ def start_interactive_add():
       note_type = "markdown"
       filename = input("Markdown dosya adi (orn: not.md): ")
 
-      if not os.path.exists("markdown_notes"):
-        os.makedirs("markdown_notes")
+      course = db.query(models.Course).filter(models.Course.id == int(course_id)).first()
+      md_dir = os.path.join("markdown_notes", course.slug)
+      if not os.path.exists(md_dir):
+        os.makedirs(md_dir)
 
-      md_path = os.path.join("markdown_notes", filename)
+      md_path = os.path.join(md_dir, filename)
 
       editor = os.environ.get('EDITOR', 'nano')
       print(f"\n>> {editor} aciliyor, notunu yaz ve kaydet... ct + O ++ ct + X")
@@ -52,8 +54,10 @@ def start_interactive_add():
       note_type = "pdf" if tip_secim == "1" else "image"
       filename = input(f"{note_type.upper()} Dosya Adi (uzantisiyla): ")
 
-      if not os.path.exists(f"uploads/{filename}"):
-        print(f"\nUYARI: 'uploads/{filename}'bulunamadi")
+      course = db.query(models.Course).filter(models.Course.id == int(course_id)).first()
+      upl_dir = os.path.join("uploads", course.slug)
+      if not os.path.exists(os.path.join(upl_dir, filename)):
+        print(f"\nUYARI: '{upl_dir}/{filename}' bulunamadi")
         if input("Yine de kaydedilsin mi? (e/h): ").lower() != 'e':
           return
      

@@ -20,15 +20,15 @@
 
 # Database
 
-* Sqlite docker imajinda volume olarak saklanacak ve backend ile o sekilde konusacak
-* Projenin kendisi de docker imaji olarak tasarlanacak
-* Birlikte paketlenmis olacak ve tek tik ile kurulum yapilacak
-* Eger 8000 portu dolu ise daha guvenli portlara bakilacak/varsayilan olarak 8000 portu guvenlik icin daha iyi portlar      ayarlanacak.
+* Sqlite docker imajinda volume olarak saklanacak ve backend ile o sekilde konusacak, [yap]
+* Projenin kendisi de docker imaji olarak tasarlanacak[yap]
+* Birlikte paketlenmis olacak ve tek tik ile kurulum yapilacak[yap]
+* [yapildi] Eger 8000 portu dolu ise daha guvenli portlara bakilacak/varsayilan olarak 8000 portu guvenlik icin daha iyi portlar ayarlanacak (Bunun icin .env kullanilmaya baslandi).
 
 # Security
 
-* Sunucunun icine sizma testleri yapmak imkansiz hale getirilecek
-* Giden veriler container da 'ro' olarak isaretlenecek
-* Database de ki admin bilerini kullanarak bir dogrulama yapilacak(su anki admin bilgileri kullanilarak)
-* add_note.py dosyasina ilk basta bu dogrulama adimi daha sonra kodun kalanina erisim izni gelecek sekilde entegrasyon yapilacak
-* suan init_db de(30-38.satilar) yer alan admin bilgilerini daha guvenli bir sekilde ekleme metodu arastirilacak(suan test asamasinda oldugu icin mudahale geremiyor).
+* [yapildi]Sunucunun icine sizma testleri yapmak imkansiz hale getirilecek
+* [yapildi]Giden veriler container da 'ro' olarak isaretlenecek
+* [yapildi]Database de ki admin bilerini kullanarak bir dogrulama yapilacak(su anki admin bilgileri kullanilarak)
+* [yapildi]add_note.py dosyasina ilk basta bu dogrulama adimi daha sonra kodun kalanina erisim izni gelecek sekilde entegrasyon yapilacak
+* [yapildi]suan init_db de(30-38.satilar) yer alan admin bilgilerini daha guvenli bir sekilde ekleme metodu arastirilacak(suan test asamasinda oldugu icin mudahale geremiyor).

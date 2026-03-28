@@ -40,6 +40,14 @@ Thumbs.db
 AGENT.md
 PROCESS.md
 DOCKER_MAPPING_GUIDE.md
-Task.html
-Task.js
-Task.py
+Task*
+
+# Sıkıştırılmış Dosyalar ve Yedekler (İmajların vb. GitHub'a gitmemesi için)
+*.tar
+*.tar.gz
+*.zip
+*.rar
+*.7z
+
+# Loglar ve Diğer Geçici Dosyalar
+*.log

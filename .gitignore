@@ -51,3 +51,6 @@ Task*
 
 # Loglar ve Diğer Geçici Dosyalar
 *.log
+
+# deploy.sh
+deploy.sh

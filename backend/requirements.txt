@@ -3,4 +3,4 @@ uvicorn[standard]
 sqlalchemy
 python-multipart
 bcrypt
-markdown
+markdown-it-py[plugins]

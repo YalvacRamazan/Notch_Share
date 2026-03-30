@@ -11,7 +11,7 @@ def init():
     db = SessionLocal()
     try:
         dersler = [
-            {"name": "Müşteri İlişkileri Yönetimi","slug": "veri-yapilari"},
+            {"name": "Müşteri İlişkileri Yönetimi","slug": "musteri-iliskileri-yonetimi"},
             {"name": "Bilgisayar Ağlarına Giriş","slug": "bilgisayar-aglarina-giris"},
             {"name": "Gönüllülük Çalışmaları","slug": "gonulluluk-calismalari"},
             {"name": "Örgüt Kültürü ve İş Etiği","slug": "orgut-kulturu-ve-is-etigi"},

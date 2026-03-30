@@ -35,8 +35,8 @@ def start_interactive_add():
 
     course_id = input("Notu eklemek istediginiz DERS ID' sini yazin: ")
     title = input("Not icin bir BASLIK gir (ORN: Hafta 1 Ozet): ")
-    print("\nNot Tipi: [1] PDF, [2] Resim, [3] Sadece Metin, [4] Markdown (Editor Acilir)")
-    tip_secim = input("Seciminiz (1/2/3/4): ")
+    print("\nNot Tipi: [1] PDF, [2] Resim, [3] Sadece Metin, [4] Markdown (Editor Acilir), [5] Link (URL)")
+    tip_secim = input("Seciminiz (1/2/3/4/5): ")
 
     note_type = "pdf"
     filename = None
@@ -45,6 +45,10 @@ def start_interactive_add():
     if tip_secim == "3":
       note_type = "text"
       content = input("Not icerigini buraya yazin: ")
+
+    elif tip_secim == "5":
+      note_type = "link"
+      content = input("Baglanti (URL) adresini girin (orn: https://...): ")
 
     elif tip_secim == "4":
       note_type = "markdown"

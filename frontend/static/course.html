@@ -56,11 +56,38 @@
           <h2 class="text-2xl font-bold flex items-center gap-3 text-white">
             <i class="far fa-folder-open text-primary text-xl"></i> Ders İçerikleri
           </h2>
+          <!-- Mobile Hamburger Menu -->
+          <div class="lg:hidden relative">
+            <button id="mobile-menu-btn" class="flex items-center gap-2 bg-cardbg hover:bg-cardhover border border-gray-700 py-2 px-4 rounded-lg text-white transition-colors focus:outline-none">
+              <i class="fas fa-bars"></i> <span id="mobile-current-tab">Notlar</span>
+            </button>
+            <div id="mobile-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-cardbg border border-gray-800 rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.5)] z-20 flex flex-col overflow-hidden">
+              <button class="text-left px-4 py-3 bg-primary/10 text-primary font-medium tab-btn" data-target="col-notes"><i class="fas fa-book-open w-5"></i> Notlar</button>
+              <button class="text-left px-4 py-3 hover:bg-gray-800 text-gray-300 tab-btn" data-target="col-docs"><i class="fas fa-file-pdf w-5 text-red-400"></i> Dokümanlar</button>
+              <button class="text-left px-4 py-3 hover:bg-gray-800 text-gray-300 tab-btn" data-target="col-links"><i class="fas fa-link w-5 text-blue-400"></i> Linkler</button>
+            </div>
+          </div>
         </div>
         
-        <ul id="pdf-list" class="space-y-6">
-          <!-- Dynamically injected by course_detail.js -->
-        </ul>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <!-- Left Column: PDFs & Images -->
+          <div id="col-docs" class="hidden lg:block lg:col-span-3 space-y-4">
+            <h3 class="text-lg font-semibold text-gray-300 border-b border-gray-800 pb-2 mb-4 hidden lg:block"><i class="fas fa-file-pdf text-red-500 mr-2"></i> Dokümanlar</h3>
+            <ul id="pdf-list" class="space-y-4"></ul>
+          </div>
+          
+          <!-- Center Column: Markdown -->
+          <div id="col-notes" class="block lg:col-span-6 space-y-4">
+            <h3 class="text-lg font-semibold text-gray-300 border-b border-gray-800 pb-2 mb-4 hidden lg:block"><i class="fas fa-book-open text-primary mr-2"></i> Notlar</h3>
+            <div id="markdown-list" class="space-y-6"></div>
+          </div>
+          
+          <!-- Right Column: Links -->
+          <div id="col-links" class="hidden lg:block lg:col-span-3 space-y-4">
+            <h3 class="text-lg font-semibold text-gray-300 border-b border-gray-800 pb-2 mb-4 hidden lg:block"><i class="fas fa-link text-blue-400 mr-2"></i> Linkler</h3>
+            <ul id="link-list" class="space-y-4"></ul>
+          </div>
+        </div>
       </main>
     </div>
 

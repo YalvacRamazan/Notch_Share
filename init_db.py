@@ -1,6 +1,7 @@
 from backend.app.db.database import SessionLocal, engine, Base
 from backend.app.db import models
 import bcrypt
+import os
 
 
 
@@ -27,6 +28,15 @@ def init():
                 )
                 db.add(new_course)
                 print(f"Eklendi: {d['name']}")
+                
+            upl_dir = os.path.join("uploads", d["slug"])
+            md_dir = os.path.join("markdown_notes", d["slug"])
+            os.makedirs(upl_dir, exist_ok=True)
+            os.makedirs(md_dir, exist_ok=True)
+            
+            # Kalicilik saglamak amaciyla .gitkeep olusturalim
+            with open(os.path.join(upl_dir, ".gitkeep"), "w") as f: f.write("")
+            with open(os.path.join(md_dir, ".gitkeep"), "w") as f: f.write("")
         admin_exists = db.query(models.Admin).filter(models.Admin.username == "rumata").first()
         if not admin_exists:
             password = "rumata1!"

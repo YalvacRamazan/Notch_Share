@@ -1,4 +1,7 @@
-import markdown
+from markdown_it import MarkdownIt
+from mdit_py_plugins.front_matter import front_matter_plugin
+from mdit_py_plugins.footnote import footnote_plugin
+from mdit_py_plugins.container import container_plugin
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
@@ -76,10 +79,24 @@ def get_notes(course_id: int, db: Session = Depends(database.get_db)):
 
     if note.note_type == "markdown" and note.file_path:
       md_path = os.path.join("markdown_notes", course.slug, note.file_path)
-      if os.path.exists(md_path):
+      
+      # Path traversal protection
+      base_dir = os.path.abspath(os.path.join("markdown_notes", course.slug))
+      abs_md_path = os.path.abspath(md_path)
+      if not abs_md_path.startswith(base_dir):
+        note_data["content"] = "<p style='color:red;'>Güvenlik Hatası: Geçersiz dosya yolu!</p>"
+      elif os.path.exists(md_path):
         with open(md_path, "r", encoding="utf-8") as f:
           md_text = f.read()
-          note_data["content"] = markdown.markdown(md_text, extensions=['extra', 'codehilite'])
+          md_parser = (
+              MarkdownIt('commonmark', {'html': True})
+              .enable('image')
+              .enable('table')
+              .use(front_matter_plugin)
+              .use(footnote_plugin)
+              .use(container_plugin, name="callout")
+          )
+          note_data["content"] = md_parser.render(md_text)
       else:
         note_data["content"] = "<p style='color:red;'>Not dosyasi bulunamadi!</p>"
     processed_notes.append(note_data)

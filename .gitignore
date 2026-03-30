@@ -15,12 +15,14 @@ dist/
 
 # Kullanıcı Dosyaları (Gizlilik ve Repo Boyutu İçin)
 uploads/*
-markdown_notes/*
+!uploads/*/
+uploads/*/*
+!uploads/*/.gitkeep
 
-# Klasör yapısının GitHub'da görünmesini ama içeriğinin boş olmasını istiyorsan 
-# bu dosyalara dokunma (Aşağıdaki .gitkeep açıklamasına bak)
-!uploads/.gitkeep
-!markdown_notes/.gitkeep
+markdown_notes/*
+!markdown_notes/*/
+markdown_notes/*/*
+!markdown_notes/*/.gitkeep
 
 # Çevresel Değişkenler (Eğer ileride .env kullanırsan)
 .env
@@ -41,6 +43,8 @@ AGENT.md
 PROCESS.md
 DOCKER_MAPPING_GUIDE.md
 Task*
+IDEA.md
+
 
 # Sıkıştırılmış Dosyalar ve Yedekler (İmajların vb. GitHub'a gitmemesi için)
 *.tar

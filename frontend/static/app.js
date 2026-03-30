@@ -32,6 +32,74 @@ async function loadCourses() {
     
     grid.appendChild(card);
   });
+
+  // Populate Modal
+  const modalList = document.getElementById("modal-exam-list");
+  if (modalList) {
+    modalList.innerHTML = "";
+    if (courses.length === 0) {
+      modalList.innerHTML = `<div class="text-center text-gray-500 text-sm py-8">Henüz ders bulunmamaktadır.</div>`;
+    } else {
+      courses.forEach((course) => {
+        const item = document.createElement("div");
+        item.className = "bg-black/30 p-4 rounded-xl border border-gray-800/50 hover:border-primary/30 transition-colors";
+        
+        const vize = course.vize_date || "Belirlenmedi";
+        const final = course.final_date || "Belirlenmedi";
+        
+        item.innerHTML = `
+          <h4 class="text-white font-semibold mb-3 flex items-center"><i class="fas fa-book text-gray-500 mr-2"></i>${course.name}</h4>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-cardbg/80 rounded-lg p-3 border border-gray-800">
+              <p class="text-gray-400 text-xs mb-1 uppercase tracking-wider"><i class="fas fa-clock text-primary mr-1.5"></i>Vize</p>
+              <p class="text-sm font-medium ${vize === 'Belirlenmedi' ? 'text-gray-500' : 'text-gray-200'}">${vize}</p>
+            </div>
+            <div class="bg-cardbg/80 rounded-lg p-3 border border-gray-800">
+              <p class="text-gray-400 text-xs mb-1 uppercase tracking-wider"><i class="fas fa-flag-checkered text-secondary mr-1.5"></i>Final</p>
+              <p class="text-sm font-medium ${final === 'Belirlenmedi' ? 'text-gray-500' : 'text-gray-200'}">${final}</p>
+            </div>
+          </div>
+        `;
+        modalList.appendChild(item);
+      });
+    }
+  }
 }
+
+// Modal Toggle Logic
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("exam-modal");
+  const modalContent = document.getElementById("exam-modal-content");
+  const openBtn = document.getElementById("exam-schedule-btn");
+  const closeBtn = document.getElementById("close-modal-btn");
+
+  if (openBtn && modal) {
+    const openModal = () => {
+      modal.classList.remove("opacity-0", "pointer-events-none");
+      modalContent.classList.remove("scale-95");
+      modalContent.classList.add("scale-100");
+    };
+
+    const closeModal = () => {
+      modal.classList.add("opacity-0", "pointer-events-none");
+      modalContent.classList.remove("scale-100");
+      modalContent.classList.add("scale-95");
+    };
+
+    openBtn.addEventListener("click", openModal);
+    
+    if (closeBtn) closeBtn.addEventListener("click", closeModal);
+    
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal();
+    });
+    
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !modal.classList.contains("opacity-0")) {
+        closeModal();
+      }
+    });
+  }
+});
 
 loadCourses();

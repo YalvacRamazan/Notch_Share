@@ -16,10 +16,12 @@ dist/
 # Kullanıcı Dosyaları (Gizlilik ve Repo Boyutu İçin)
 uploads/*
 !uploads/*/
+uploads/*/*
 !uploads/*/.gitkeep
 
 markdown_notes/*
 !markdown_notes/*/
+markdown_notes/*/*
 !markdown_notes/*/.gitkeep
 
 # Çevresel Değişkenler (Eğer ileride .env kullanırsan)

@@ -93,8 +93,8 @@ async function loadCourseDetail() {
           hasNotes = true;
           contentHtml = `
           ${headerHtml}
-          <div class="p-6 md:p-8 text-gray-300 leading-relaxed bg-black/10">
-            <div class="prose prose-invert prose-rose max-w-none prose-img:rounded-lg prose-img:border prose-img:border-gray-700 prose-img:shadow-md prose-headings:border-b prose-headings:border-gray-800 prose-headings:pb-2">
+          <div class="p-4 md:p-6 text-gray-300 leading-relaxed bg-black/10">
+            <div class="prose prose-invert prose-rose max-w-none prose-img:rounded-lg prose-img:border prose-img:border-gray-700 prose-img:shadow-md prose-headings:border-b prose-headings:border-gray-800 prose-headings:pb-1 prose-headings:mb-2 prose-h1:text-xl prose-h2:text-lg prose-h3:text-base prose-p:my-2 prose-p:leading-snug">
               ${note.content}
             </div>
           </div>

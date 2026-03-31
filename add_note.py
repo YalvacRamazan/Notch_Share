@@ -61,8 +61,27 @@ def start_interactive_add():
 
       md_path = os.path.join(md_dir, filename)
 
-      editor = os.environ.get('EDITOR', 'nano')
-      print(f"\n>> {editor} aciliyor, notunu yaz ve kaydet... ct + O ++ ct + X")
+      import shutil
+      
+      # Kullanicinin ortam degiskeninde belirtmis olabilecegi editoru alalim
+      editor = os.environ.get('EDITOR')
+      
+      # Eger EDITOR tanimli degilse veya kurulu degilse, sirayla kurulu olanlari deneyelim
+      if not editor or not shutil.which(editor):
+        for e in ['nano', 'vim', 'vi']:
+          if shutil.which(e):
+            editor = e
+            break
+            
+      if not editor:
+        print("\n[HATA] Sisteminizde vim, vi veya nano gibi bir metin editoru bulunamadi.")
+        if input("Daha sonra manuel olarak eklemek uzere bos bir dosya olusturulsun mu? (e/h): ").lower() == 'e':
+          open(md_path, 'w').close()
+          print(f"Bos dosya olusturuldu: {md_path}")
+        return
+
+      kisa_yol = ":wq" if editor in ["vim", "vi"] else "Ctrl+O ardindan Ctrl+X"
+      print(f"\n>> {editor} aciliyor, notunu yaz ve kaydet... ({kisa_yol})")
       subprocess.call([editor, md_path])
 
       if not os.path.exists(md_path):

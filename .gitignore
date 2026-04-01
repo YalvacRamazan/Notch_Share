@@ -61,3 +61,5 @@ PROBLEMS.md
 deploy.sh
 # linux kisayollari
 .alias
+#Yedek Kodlar
+Backup_add_notes.py

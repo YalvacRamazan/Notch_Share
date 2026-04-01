@@ -56,8 +56,8 @@
           <h2 class="text-2xl font-bold flex items-center gap-3 text-white">
             <i class="far fa-folder-open text-primary text-xl"></i> Ders İçerikleri
           </h2>
-          <!-- Mobile Hamburger Menu -->
-          <div class="lg:hidden relative">
+          <!-- Menu (Desktop & Mobile) -->
+          <div class="relative">
             <button id="mobile-menu-btn" class="flex items-center gap-2 bg-cardbg hover:bg-cardhover border border-gray-700 py-2 px-4 rounded-lg text-white transition-colors focus:outline-none">
               <i class="fas fa-bars"></i> <span id="mobile-current-tab">Notlar</span>
             </button>
@@ -69,21 +69,21 @@
           </div>
         </div>
         
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div class="grid grid-cols-1 gap-8 items-start">
           <!-- Left Column: PDFs & Images -->
-          <div id="col-docs" class="hidden lg:block lg:col-span-3 space-y-4">
+          <div id="col-docs" class="hidden space-y-4 w-full max-w-4xl mx-auto">
             <h3 class="text-lg font-semibold text-gray-300 border-b border-gray-800 pb-2 mb-4 hidden lg:block"><i class="fas fa-file-pdf text-red-500 mr-2"></i> Dokümanlar</h3>
             <ul id="pdf-list" class="space-y-4"></ul>
           </div>
           
           <!-- Center Column: Markdown -->
-          <div id="col-notes" class="block lg:col-span-6 space-y-4">
+          <div id="col-notes" class="block space-y-4 w-full max-w-4xl mx-auto">
             <h3 class="text-lg font-semibold text-gray-300 border-b border-gray-800 pb-2 mb-4 hidden lg:block"><i class="fas fa-book-open text-primary mr-2"></i> Notlar</h3>
             <div id="markdown-list" class="space-y-6"></div>
           </div>
           
           <!-- Right Column: Links -->
-          <div id="col-links" class="hidden lg:block lg:col-span-3 space-y-4">
+          <div id="col-links" class="hidden space-y-4 w-full max-w-4xl mx-auto">
             <h3 class="text-lg font-semibold text-gray-300 border-b border-gray-800 pb-2 mb-4 hidden lg:block"><i class="fas fa-link text-blue-400 mr-2"></i> Linkler</h3>
             <ul id="link-list" class="space-y-4"></ul>
           </div>

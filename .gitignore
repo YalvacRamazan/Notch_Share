@@ -26,6 +26,7 @@ markdown_notes/*/*
 
 # Çevresel Değişkenler (Eğer ileride .env kullanırsan)
 .env
+.env.example
 
 # Sistem Dosyaları
 .DS_Store

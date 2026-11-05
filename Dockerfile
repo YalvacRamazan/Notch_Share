@@ -12,10 +12,11 @@ COPY backend/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
-RUN chmod +x entrypoint.sh
+RUN chmod +x entrypoint.sh start.sh
 
-EXPOSE 8080
+# 8080: ana site, 8081: admin paneli
+EXPOSE 8080 8081
 
 ENV PYTHONPATH=/app
 ENTRYPOINT ["/app/entrypoint.sh"]
-CMD ["uvicorn", "backend.app.main:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["sh", "/app/start.sh"]

@@ -3,94 +3,79 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YBS_NOTLARI | Yönetim Bilişim Sistemleri Ders Notları</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome -->
+    <meta name="theme-color" content="#f5f1e8">
+    <meta name="description" content="Yönetim Bilişim Sistemleri ders notları, dokümanları ve sınav takvimi.">
+    <title>YBS Ders Arşivi | Yönetim Bilişim Sistemleri</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Custom CSS for base styles / animations -->
     <link rel="stylesheet" href="/static/style.css">
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              background: '#110c11', // Very dark red/purple tint
-              cardbg: '#1a1014',     // Dark slightly red card bg
-              cardhover: '#25131a',
-              primary: '#e11d48',    // Rose-600
-              secondary: '#9f1239'   // Rose-800
-            },
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-            }
-          }
-        }
-      }
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   </head>
-  <body class="bg-background text-gray-200 font-sans min-h-screen flex flex-col antialiased selection:bg-primary selection:text-white">
-    
-    <div class="container mx-auto px-4 py-10 flex-grow max-w-6xl">
-      <header class="text-center mb-16 relative">
-        <div class="absolute inset-0 flex justify-center items-center -z-10">
-          <div class="w-64 h-64 bg-primary/20 rounded-full blur-3xl"></div>
-          <div class="w-64 h-64 bg-secondary/20 rounded-full blur-3xl -ml-20"></div>
-        </div>
-        
-        <h1 class="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary mb-4 tracking-tight">
-          Yönetim Bilişim Sistemleri
-        </h1>
-        <h2 class="text-2xl md:text-3xl text-gray-300 font-medium mb-8">Ders Notları</h2>
-        
-        <button id="exam-schedule-btn" class="inline-flex items-center justify-center gap-3 bg-cardbg/80 hover:bg-cardhover backdrop-blur-md border border-gray-800 hover:border-primary/50 px-6 py-3 rounded-full text-sm font-medium shadow-lg transition-all duration-300 cursor-pointer focus:outline-none">
-          <i class="fas fa-calendar-alt text-primary text-lg"></i>
-          <span class="text-gray-200">Sınav Takvimi</span>
-        </button>
-      </header>
-
-      <main>
-        <div id="course-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Courses injected by app.js -->
-        </div>
-      </main>
-    </div>
-
-    <!-- Exam Modal -->
-    <div id="exam-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
-      <div id="exam-modal-content" class="bg-cardbg border border-gray-800 rounded-2xl p-6 md:p-8 max-w-lg w-full mx-4 shadow-2xl transform scale-95 transition-transform duration-300 shadow-[0_0_30px_rgba(225,29,72,0.1)] relative max-h-[85vh] flex flex-col">
-        <button id="close-modal-btn" class="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors focus:outline-none">
-          <i class="fas fa-times text-2xl"></i>
-        </button>
-        <div class="text-center mb-6 shrink-0">
-          <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4 text-primary text-2xl">
-            <i class="fas fa-calendar-alt"></i>
-          </div>
-          <h3 class="text-2xl font-bold text-white">Sınav Takvimi</h3>
-          <p class="text-sm text-gray-400 mt-2">Derslere ait vize ve final tarihleri</p>
-        </div>
-        <div class="overflow-y-auto pr-2 flex-grow" style="scrollbar-width: thin; scrollbar-color: #374151 transparent;">
-          <div id="modal-exam-list" class="space-y-4">
-            <!-- Modal content injected by app.js -->
-            <div class="text-center text-gray-500 text-sm py-8"><i class="fas fa-spinner fa-spin mr-2"></i>Yükleniyor...</div>
-          </div>
-        </div>
+  <body class="site-body home-page">
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="/" aria-label="YBS Ders Arşivi ana sayfa">
+          <span class="brand-mark" aria-hidden="true">Y</span>
+          <span class="brand-copy"><strong>YBS</strong><span>Ders Arşivi</span></span>
+        </a>
+        <nav class="primary-nav" aria-label="Ana gezinme">
+          <a class="nav-link active" href="#courses">Dersler</a>
+          <button id="exam-schedule-btn" class="nav-link nav-action" type="button">Sınav takvimi</button>
+        </nav>
       </div>
+    </header>
+
+    <main class="page-shell">
+      <section class="intro-section" aria-labelledby="page-title">
+        <div class="intro-copy">
+          <p class="eyebrow">Yönetim Bilişim Sistemleri</p>
+          <h1 id="page-title">Derslerin,<br><span>tek bir yerde.</span></h1>
+          <p class="intro-description">Ders notlarına, kaynaklara ve sınav tarihlerine kolayca ulaş. Arşive göz at, çalışmaya kaldığın yerden devam et.</p>
+          <a class="button button-primary" href="#courses">Dersleri keşfet <i class="fas fa-arrow-down" aria-hidden="true"></i></a>
+        </div>
+        <div class="intro-art" aria-hidden="true">
+          <div class="paper-sheet paper-back"></div>
+          <div class="paper-sheet paper-front">
+            <span class="paper-rule"></span><span class="paper-rule short"></span>
+            <span class="paper-symbol"><i class="fas fa-book-open"></i></span>
+            <span class="paper-caption">DERS<br>NOTLARI</span>
+            <span class="paper-rule"></span><span class="paper-rule medium"></span>
+          </div>
+          <span class="art-index">01 / ARŞİV</span>
+        </div>
+      </section>
+
+      <section id="courses" class="courses-section" aria-labelledby="courses-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Arşive göz at</p>
+            <h2 id="courses-title">Dersler</h2>
+          </div>
+          <p class="section-note">Bir ders seçerek notları ve kaynakları görüntüle.</p>
+        </div>
+        <div id="course-grid" class="course-grid" aria-live="polite">
+          <p class="loading-message">Dersler yükleniyor…</p>
+        </div>
+      </section>
+    </main>
+
+    <div id="exam-modal" class="modal-overlay is-closed" role="presentation">
+      <section id="exam-modal-content" class="exam-dialog" role="dialog" aria-modal="true" aria-labelledby="exam-modal-title" aria-describedby="exam-modal-description">
+        <button id="close-modal-btn" class="icon-button modal-close" type="button" aria-label="Pencereyi kapat"><i class="fas fa-times" aria-hidden="true"></i></button>
+        <p class="eyebrow">Takvim</p>
+        <h2 id="exam-modal-title">Sınav tarihleri</h2>
+        <p id="exam-modal-description" class="dialog-description">Derslere ait vize ve final tarihleri.</p>
+        <div id="modal-exam-list" class="exam-list">
+          <p class="loading-message">Sınav takvimi yükleniyor…</p>
+        </div>
+      </section>
     </div>
 
-    <!-- Footer -->
-    <footer class="mt-auto border-t border-gray-800 bg-background/80 backdrop-blur-md py-6">
-      <div class="container mx-auto px-4 text-center">
-        <p class="text-gray-400 font-medium text-sm">
-          Geliştirici İletişim: 
-          <a href="https://github.com/rumata01" target="_blank" class="inline-flex items-center ml-1 text-primary hover:text-white transition-colors duration-300">
-            <i class="fab fa-github text-lg mr-1.5"></i> Rumata
-          </a>
-        </p>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <span>YBS Ders Arşivi</span>
+        <a href="https://github.com/YalvacRamazan/Notch_Share" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> github.com/YalvacRamazan/Notch_Share</a>
       </div>
     </footer>
 
-    <script src="/static/app.js"></script>
+    <script src="/static/app.js" defer></script>
   </body>
 </html>

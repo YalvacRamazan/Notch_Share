@@ -1,12 +1,22 @@
-version: '3.8'
-
 services:
   web:
     build: .
     ports:
       - "${HOST_PORT:-8080}:8080"
+      # Admin paneli yayin hattindan ayri portta acilir
+      # (cloudflared Access ile bu portu korumaya alabilirsiniz)
+      - "${ADMIN_HOST_PORT:-8081}:8081"
+    networks:
+      # cloudflared tunnel'in ayni aga baglanmasi icin
+      - tunnel-net
     environment:
       - DATABASE_PATH=/app/data/ybs_notlar.db
+      - ADMIN_PORT=8081
+      # Oturum cerezlerini imzalamak icin uzun ve rastgele bir deger girin
+      - ADMIN_SESSION_SECRET=${ADMIN_SESSION_SECRET:-}
+      # Ilk kurulumda olusturulacak admin hesabi (init_db.py kullanir)
+      - ADMIN_USERNAME=${ADMIN_USERNAME:-rumata}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-rumata1!}
     volumes:
       # Veritabanını kalıcı kılacak volume dizini
       - sqlite_data:/app/data
@@ -24,3 +34,9 @@ volumes:
   sqlite_data:
   uploads_data:
   markdown_data:
+
+networks:
+  # Sabit isimli ag: cloudflared baska bir compose projesinde olsa bile
+  # "tunnel-net" agina external olarak baglanabilir.
+  tunnel-net:
+    name: tunnel-net

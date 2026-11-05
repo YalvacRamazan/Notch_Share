@@ -37,15 +37,17 @@ def init():
             # Kalicilik saglamak amaciyla .gitkeep olusturalim
             with open(os.path.join(upl_dir, ".gitkeep"), "w") as f: f.write("")
             with open(os.path.join(md_dir, ".gitkeep"), "w") as f: f.write("")
-        admin_exists = db.query(models.Admin).filter(models.Admin.username == "rumata").first()
+        # Admin hesabi .env uzerinden ozellestirilebilir (ADMIN_USERNAME / ADMIN_PASSWORD)
+        admin_username = os.getenv("ADMIN_USERNAME", "rumata")
+        admin_password = os.getenv("ADMIN_PASSWORD", "rumata1!")
+        admin_exists = db.query(models.Admin).filter(models.Admin.username == admin_username).first()
         if not admin_exists:
-            password = "rumata1!"
             salt = bcrypt.gensalt()
-            hashed_pw = bcrypt.hashpw(password.encode('utf-8'), salt)
+            hashed_pw = bcrypt.hashpw(admin_password.encode('utf-8'), salt)
 
-            new_admin = models.Admin(username="rumata", password_hash=hashed_pw.decode('utf-8'))
+            new_admin = models.Admin(username=admin_username, password_hash=hashed_pw.decode('utf-8'))
             db.add(new_admin)
-            print("Admin 'rumata' olusturuldu.")
+            print(f"Admin '{admin_username}' olusturuldu.")
         db.commit()
         print("Islem gerceklesti")
     except Exception as e:

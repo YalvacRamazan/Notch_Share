@@ -3,106 +3,65 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ders Detayı | YBS_NOTLARI</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome -->
+    <meta name="theme-color" content="#f5f1e8">
+    <meta name="description" content="Yönetim Bilişim Sistemleri ders notları ve kaynakları.">
+    <title>Ders Detayı | YBS Ders Arşivi</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="/static/style.css">
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              background: '#110c11',
-              cardbg: '#1a1014',
-              cardhover: '#25131a',
-              primary: '#e11d48',
-              secondary: '#9f1239'
-            },
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-            }
-          }
-        }
-      }
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   </head>
-  <body class="bg-background text-gray-200 font-sans min-h-screen flex flex-col antialiased selection:bg-primary selection:text-white">
-    
-    <div class="container mx-auto px-4 py-8 flex-grow max-w-5xl">
-      <header class="mb-12 relative flex flex-col items-center">
-        <!-- Background glow -->
-        <div class="absolute top-0 flex justify-center items-center -z-10 w-full opacity-50">
-          <div class="w-64 h-32 bg-primary/20 rounded-full blur-3xl"></div>
+  <body class="site-body detail-page">
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="/" aria-label="YBS Ders Arşivi ana sayfa">
+          <span class="brand-mark" aria-hidden="true">Y</span>
+          <span class="brand-copy"><strong>YBS</strong><span>Ders Arşivi</span></span>
+        </a>
+        <nav class="primary-nav" aria-label="Ana gezinme">
+          <a class="nav-link" href="/">Tüm dersler</a>
+          <a class="nav-link nav-github" href="https://github.com/YalvacRamazan/Notch_Share" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page-shell detail-shell">
+      <a class="back-link" href="/"><i class="fas fa-arrow-left" aria-hidden="true"></i> Ders arşivine dön</a>
+      <section class="course-hero" aria-labelledby="course-name">
+        <p class="eyebrow">Ders sayfası</p>
+        <h1 id="course-name">Ders yükleniyor…</h1>
+        <div id="exam-dates" class="course-exam-dates" aria-label="Sınav tarihleri"></div>
+      </section>
+
+      <section class="materials-section" aria-labelledby="materials-title">
+        <div class="section-heading materials-heading">
+          <div><p class="eyebrow">Ders kaynakları</p><h2 id="materials-title">İçerikler</h2></div>
+        </div>
+        <div class="material-tabs" role="tablist" aria-label="İçerik türü">
+          <button class="material-tab is-active tab-btn" id="tab-notes" type="button" role="tab" aria-selected="true" aria-controls="col-notes" data-target="col-notes"><i class="fas fa-book-open" aria-hidden="true"></i> Notlar</button>
+          <button class="material-tab tab-btn" id="tab-docs" type="button" role="tab" aria-selected="false" aria-controls="col-docs" data-target="col-docs"><i class="fas fa-file-pdf" aria-hidden="true"></i> Dokümanlar</button>
+          <button class="material-tab tab-btn" id="tab-links" type="button" role="tab" aria-selected="false" aria-controls="col-links" data-target="col-links"><i class="fas fa-link" aria-hidden="true"></i> Bağlantılar</button>
         </div>
 
-        <div class="w-full flex justify-between items-start mb-6">
-          <button onclick="location.href = '/'" class="group flex items-center gap-2 px-4 py-2 bg-cardbg hover:bg-cardhover border border-gray-700 hover:border-primary rounded-lg text-gray-300 hover:text-white transition-all duration-300 shadow-sm hover:shadow-[0_0_15px_rgba(225,29,72,0.3)]">
-            <i class="fas fa-arrow-left text-primary group-hover:-translate-x-1 transition-transform"></i> Geri Dön
-          </button>
+        <div class="materials-content">
+          <section id="col-notes" class="material-panel" role="tabpanel" aria-labelledby="tab-notes">
+            <div id="markdown-list" class="note-list"></div>
+          </section>
+          <section id="col-docs" class="material-panel is-hidden" role="tabpanel" aria-labelledby="tab-docs" hidden>
+            <div id="pdf-list" class="note-list"></div>
+          </section>
+          <section id="col-links" class="material-panel is-hidden" role="tabpanel" aria-labelledby="tab-links" hidden>
+            <div id="link-list" class="note-list"></div>
+          </section>
         </div>
+      </section>
+    </main>
 
-        <h1 id="course-name" class="text-3xl md:text-5xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary mb-4 drop-shadow-sm">
-          Ders Yükleniyor...
-        </h1>
-        <p id="exam-dates" class="text-gray-400 text-sm font-medium bg-cardbg/50 px-4 py-1.5 rounded-full border border-gray-800"></p>
-      </header>
-
-      <main class="md:px-8">
-        <div class="flex items-center justify-between mb-8 border-b border-gray-800 pb-4">
-          <h2 class="text-2xl font-bold flex items-center gap-3 text-white">
-            <i class="far fa-folder-open text-primary text-xl"></i> Ders İçerikleri
-          </h2>
-          <!-- Menu (Desktop & Mobile) -->
-          <div class="relative">
-            <button id="mobile-menu-btn" class="flex items-center gap-2 bg-cardbg hover:bg-cardhover border border-gray-700 py-2 px-4 rounded-lg text-white transition-colors focus:outline-none">
-              <i class="fas fa-bars"></i> <span id="mobile-current-tab">Notlar</span>
-            </button>
-            <div id="mobile-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-cardbg border border-gray-800 rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.5)] z-20 flex flex-col overflow-hidden">
-              <button class="text-left px-4 py-3 bg-primary/10 text-primary font-medium tab-btn" data-target="col-notes"><i class="fas fa-book-open w-5"></i> Notlar</button>
-              <button class="text-left px-4 py-3 hover:bg-gray-800 text-gray-300 tab-btn" data-target="col-docs"><i class="fas fa-file-pdf w-5 text-red-400"></i> Dokümanlar</button>
-              <button class="text-left px-4 py-3 hover:bg-gray-800 text-gray-300 tab-btn" data-target="col-links"><i class="fas fa-link w-5 text-blue-400"></i> Linkler</button>
-            </div>
-          </div>
-        </div>
-        
-        <div class="grid grid-cols-1 gap-8 items-start">
-          <!-- Left Column: PDFs & Images -->
-          <div id="col-docs" class="hidden space-y-4 w-full max-w-4xl mx-auto">
-            <h3 class="text-lg font-semibold text-gray-300 border-b border-gray-800 pb-2 mb-4 hidden lg:block"><i class="fas fa-file-pdf text-red-500 mr-2"></i> Dokümanlar</h3>
-            <ul id="pdf-list" class="space-y-4"></ul>
-          </div>
-          
-          <!-- Center Column: Markdown -->
-          <div id="col-notes" class="block space-y-4 w-full max-w-4xl mx-auto">
-            <h3 class="text-lg font-semibold text-gray-300 border-b border-gray-800 pb-2 mb-4 hidden lg:block"><i class="fas fa-book-open text-primary mr-2"></i> Notlar</h3>
-            <div id="markdown-list" class="space-y-6"></div>
-          </div>
-          
-          <!-- Right Column: Links -->
-          <div id="col-links" class="hidden space-y-4 w-full max-w-4xl mx-auto">
-            <h3 class="text-lg font-semibold text-gray-300 border-b border-gray-800 pb-2 mb-4 hidden lg:block"><i class="fas fa-link text-blue-400 mr-2"></i> Linkler</h3>
-            <ul id="link-list" class="space-y-4"></ul>
-          </div>
-        </div>
-      </main>
-    </div>
-
-    <!-- Footer -->
-    <footer class="mt-auto border-t border-gray-800 bg-background/80 backdrop-blur-md py-6">
-      <div class="container mx-auto px-4 text-center">
-        <p class="text-gray-400 font-medium text-sm">
-          Geliştirici İletişim: 
-          <a href="https://github.com/rumata01" target="_blank" class="inline-flex items-center ml-1 text-primary hover:text-white transition-colors duration-300">
-            <i class="fab fa-github text-lg mr-1.5"></i> Rumata
-          </a>
-        </p>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <span>YBS Ders Arşivi</span>
+        <a href="https://github.com/YalvacRamazan/Notch_Share" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> github.com/YalvacRamazan/Notch_Share</a>
       </div>
     </footer>
 
-    <script src="/static/course_detail.js"></script>
+    <script src="/static/course_detail.js" defer></script>
   </body>
 </html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f5f1e8">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Yönetim Paneli | YBS Ders Arşivi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/admin/static/admin.css">
+  </head>
+  <body class="admin-body panel-body">
+    <header class="admin-header">
+      <div class="admin-header-inner">
+        <a class="brand" href="/admin/panel" aria-label="Yönetim paneli">
+          <span class="brand-mark" aria-hidden="true">Y</span>
+          <span class="brand-copy"><strong>YBS</strong><span>Yönetim Paneli</span></span>
+        </a>
+        <div class="admin-header-actions">
+          <span id="admin-user" class="admin-user"></span>
+          <button id="logout-btn" class="button button-ghost" type="button"><i class="fas fa-right-from-bracket" aria-hidden="true"></i> Çıkış</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="panel-shell">
+      <aside class="courses-pane" aria-labelledby="courses-pane-title">
+        <div class="pane-heading">
+          <h2 id="courses-pane-title">Dersler</h2>
+          <span id="course-count" class="pane-count"></span>
+        </div>
+        <ul id="course-list" class="course-list"></ul>
+        <form id="course-create-form" class="stack-form">
+          <h3>Yeni ders ekle</h3>
+          <label class="field">
+            <span>Ders adı</span>
+            <input id="new-course-name" type="text" required maxlength="200" placeholder="Örn: Veri Yapıları">
+          </label>
+          <label class="field">
+            <span>Slug (URL)</span>
+            <input id="new-course-slug" type="text" required maxlength="80" pattern="[a-z0-9]+(-[a-z0-9]+)*" placeholder="orn: veri-yapilari">
+          </label>
+          <p id="course-form-error" class="form-error" role="alert" hidden></p>
+          <button class="button button-primary button-block" type="submit"><i class="fas fa-plus" aria-hidden="true"></i> Ders ekle</button>
+        </form>
+      </aside>
+
+      <section id="course-detail" class="detail-pane" aria-labelledby="detail-title">
+        <div class="detail-empty" id="detail-empty">
+          <p>Sol taraftan bir ders seçin veya yeni bir ders ekleyin.</p>
+        </div>
+
+        <div id="detail-content" hidden>
+          <div class="detail-heading">
+            <div>
+              <p class="eyebrow">Ders yönetimi</p>
+              <h2 id="detail-title">Ders</h2>
+              <p id="detail-slug" class="detail-slug"></p>
+            </div>
+            <button id="delete-course-btn" class="button button-danger" type="button"><i class="fas fa-trash" aria-hidden="true"></i> Dersi sil</button>
+          </div>
+
+          <section class="panel-card" aria-labelledby="exam-form-title">
+            <h3 id="exam-form-title">Sınav tarihleri</h3>
+            <form id="exam-form" class="inline-form">
+              <label class="field">
+                <span>Vize</span>
+                <input id="exam-vize" type="text" maxlength="50" placeholder="Örn: 15.04.2026">
+              </label>
+              <label class="field">
+                <span>Final</span>
+                <input id="exam-final" type="text" maxlength="50" placeholder="Örn: 05.06.2026">
+              </label>
+              <button class="button button-primary" type="submit">Kaydet</button>
+            </form>
+            <p id="exam-form-status" class="form-status" role="status" hidden></p>
+          </section>
+
+          <section class="panel-card" aria-labelledby="add-note-title">
+            <h3 id="add-note-title">Yeni içerik ekle</h3>
+            <form id="note-form" class="stack-form">
+              <div class="field-row">
+                <label class="field">
+                  <span>Başlık</span>
+                  <input id="note-title" type="text" required maxlength="200" placeholder="Örn: Hafta 1 Özet">
+                </label>
+                <label class="field">
+                  <span>İçerik türü</span>
+                  <select id="note-type">
+                    <option value="markdown">Not (Markdown)</option>
+                    <option value="text">Metin</option>
+                    <option value="link">Bağlantı</option>
+                    <option value="pdf">PDF</option>
+                    <option value="image">Görsel</option>
+                  </select>
+                </label>
+              </div>
+              <div class="type-fields" data-for="markdown">
+                <label class="field">
+                  <span>Dosya adı</span>
+                  <input id="note-md-filename" type="text" placeholder="orn: hafta-1.md">
+                </label>
+                <label class="field">
+                  <span>Markdown içeriği</span>
+                  <textarea id="note-md-content" rows="8" placeholder="# Hafta 1&#10;Konu anlatımı..."></textarea>
+                </label>
+              </div>
+              <div class="type-fields" data-for="text" hidden>
+                <label class="field">
+                  <span>Metin içeriği</span>
+                  <textarea id="note-text-content" rows="5" placeholder="Not metnini yazın..."></textarea>
+                </label>
+              </div>
+              <div class="type-fields" data-for="link" hidden>
+                <label class="field">
+                  <span>Bağlantı adresi</span>
+                  <input id="note-link-url" type="url" placeholder="https://...">
+                </label>
+              </div>
+              <div class="type-fields" data-for="pdf image" hidden>
+                <label class="field">
+                  <span>Dosya (PDF veya görsel)</span>
+                  <input id="note-file" type="file" accept=".pdf,.png,.jpg,.jpeg,.gif,.webp">
+                </label>
+              </div>
+              <p id="note-form-error" class="form-error" role="alert" hidden></p>
+              <button class="button button-primary" type="submit"><i class="fas fa-plus" aria-hidden="true"></i> İçerik ekle</button>
+            </form>
+          </section>
+
+          <section class="panel-card" aria-labelledby="notes-title">
+            <div class="pane-heading">
+              <h3 id="notes-title">İçerikler</h3>
+              <span id="note-count" class="pane-count"></span>
+            </div>
+            <div id="note-list" class="admin-note-list"></div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <span>YBS Ders Arşivi — Yönetim</span>
+        <a href="https://github.com/YalvacRamazan/Notch_Share" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> github.com/YalvacRamazan/Notch_Share</a>
+      </div>
+    </footer>
+
+    <script src="/admin/static/panel.js" defer></script>
+  </body>
+</html>

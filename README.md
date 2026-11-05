@@ -19,7 +19,7 @@ Yönetim Bilişim Sistemleri dersleri için not arşivi. Ders notları, doküman
 
 | Uygulama | Container portu | Varsayılan host portu |
 |----------|-----------------|-----------------------|
-| Ana site | 8080 | 8080 |
+| Ana site | 8082 | 8082 |
 | Admin paneli | 8081 | 8081 |
 
 ## Docker ile çalıştırma
@@ -27,7 +27,7 @@ Yönetim Bilişim Sistemleri dersleri için not arşivi. Ders notları, doküman
 1. Proje kökünde `.env` dosyası oluşturun:
 
 ```env
-HOST_PORT=8080
+HOST_PORT=8082
 ADMIN_HOST_PORT=8081
 ADMIN_SESSION_SECRET=<openssl rand -hex 32 çıktısı>
 ADMIN_USERNAME=rumata
@@ -42,14 +42,14 @@ docker compose up --build -d
 
 3. Tarayıcıdan açın:
 
-- Ana site: `http://localhost:8080`
+- Ana site: `http://localhost:8082`
 - Admin paneli: `http://localhost:8081/admin`
 
 ## Ortam değişkenleri
 
 | Değişken | Varsayılan | Açıklama |
 |----------|------------|----------|
-| `HOST_PORT` | `8080` | Ana sitenin host portu |
+| `HOST_PORT` | `8082` | Ana sitenin host portu |
 | `ADMIN_HOST_PORT` | `8081` | Admin panelinin host portu |
 | `ADMIN_SESSION_SECRET` | (rastgele) | Oturum çerezlerini imzalayan anahtar. Boş bırakılırsa her yeniden başlatmada oturumlar sıfırlanır |
 | `ADMIN_USERNAME` | `rumata` | İlk kurulumda oluşturulan admin kullanıcı adı |
@@ -64,7 +64,7 @@ source .venv/bin/activate
 pip install -r backend/requirements.txt
 python init_db.py
 
-uvicorn backend.app.main:app --reload                      # ana site, 8080
+uvicorn backend.app.main:app --reload                      # ana site, 8082
 uvicorn backend.app.admin:admin_app --port 8081 --reload   # admin paneli, 8081
 ```
 
@@ -85,7 +85,7 @@ uvicorn backend.app.admin:admin_app --port 8081 --reload   # admin paneli, 8081
 ## Proje yapısı
 
 ```
-backend/app/main.py      ana site API'si (port 8080)
+backend/app/main.py      ana site API'si (port 8082)
 backend/app/admin.py     admin paneli API'si (port 8081)
 backend/app/db/          SQLAlchemy modelleri ve veritabanı bağlantısı
 frontend/static/         ana site arayüzü

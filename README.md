@@ -103,6 +103,27 @@ uploads/                 ders bazlı yüklenen dosyalar
 
 Admin işlemleri `/admin/api/...` altındadır ve oturum gerektirir.
 
+## Cloudflare Tunnel ile yayınlama
+
+1. Cloudflare Zero Trust panelinde bir tunnel oluşturun ve token'ı `.env` dosyasına ekleyin:
+
+```env
+TUNNEL_TOKEN=<tunnel token'ınız>
+```
+
+2. `docker compose up -d` ile cloudflared servisini başlatın.
+
+3. Cloudflare panelinde tunnel'a hostname ekleyin. Servis adreslerinde container adı değil, compose servis adı kullanılır:
+
+| Hostname | Servis |
+|----------|--------|
+| `notlar.siteniz.com` | `http://web:8082` |
+| `admin.siteniz.com` | `http://web:8081` |
+
+4. Admin panelini korumak için Zero Trust → Access → Applications → Self-hosted ile `admin.siteniz.com` üzerine bir erişim politikası ekleyin.
+
+Tunnel kullanıldığında host portlarını firewall'da açmanıza gerek kalmaz; trafik container ağı üzerinden geçer.
+
 ## Bağlantı
 
 Depo: [github.com/YalvacRamazan/Notch_Share](https://github.com/YalvacRamazan/Notch_Share)

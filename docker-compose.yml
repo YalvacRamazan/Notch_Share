@@ -30,6 +30,18 @@ services:
       - ./init_db.py:/app/init_db.py:ro
     restart: always
 
+  # Cloudflare Tunnel: TUNNEL_TOKEN'i .env dosyasina ekleyin.
+  # Cloudflare panelinde hostname'ler:
+  #   ana site  -> http://web:8082
+  #   admin     -> http://web:8081
+  # Ayri bir cloudflared calistiriyorsaniz bu servisi silin.
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    command: tunnel run --token ${TUNNEL_TOKEN}
+    networks:
+      - tunnel-net
+    restart: always
+
 volumes:
   sqlite_data:
   uploads_data:

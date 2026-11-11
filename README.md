@@ -127,3 +127,4 @@ Tunnel kullanıldığında host portlarını firewall'da açmanıza gerek kalmaz
 ## Bağlantı
 
 Depo: [github.com/YalvacRamazan/Notch_Share](https://github.com/YalvacRamazan/Notch_Share)
+[Lisans](https://github.com/YalvacRamazan/Notch_Share/LISENCE)
